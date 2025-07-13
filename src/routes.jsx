@@ -3,6 +3,8 @@ import AuthLayout from "./components/AuthLayout/AuthLayout";
 import LoginForm from "./components/LoginForm/LoginForm";
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 
+import Counter from "./Counter"
+
 export const routes = [
   {
     path: "/",
@@ -17,11 +19,15 @@ export const routes = [
             element: <LoginForm />,
           },
           {
-            path: "register",
+            path: "registration",
             element: <RegistrationForm />,
           },
         ],
       },
+      {
+        element: <Counter />,
+        path: "counter"
+      }
     ],
   },
 ];
