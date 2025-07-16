@@ -1,9 +1,11 @@
 import App from "./App.jsx";
 import AuthLayout from "./components/AuthLayout/AuthLayout";
-import LoginForm from "./components/LoginForm/LoginForm";
-import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
+import LoginForm from "./components/AuthComponents/LoginForm/LoginForm.jsx";
+import RegistrationForm from "./components/AuthComponents/RegistrationForm/RegistrationForm";
 
-import Counter from "./Counter"
+import MainLayout from "./components/MainLayout/MainLayout"
+
+import Counter from "./Counter";
 
 export const routes = [
   {
@@ -12,10 +14,19 @@ export const routes = [
     /* errorElement: <ErrorPage/>, */
     children: [
       {
-        element: <AuthLayout />,
+        element: <MainLayout />,
         children: [
           {
             index: true,
+            element: <Counter />,
+            path: "/",
+          },
+        ],
+      },
+      {
+        element: <AuthLayout />,
+        children: [
+          {
             element: <LoginForm />,
           },
           {
@@ -23,10 +34,6 @@ export const routes = [
             element: <RegistrationForm />,
           },
         ],
-      },
-      {
-        element: <Counter />,
-        path: "counter"
       }
     ],
   },

@@ -1,9 +1,9 @@
-import styles from "./RegistrationForm.module.css";
-import useInput from "../../hooks/useInput";
+import styles from "../AuthModal/AuthModal.module.css";
+import useInput from "../../../hooks/useInput";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-const RegistrationForm = () => {
+const RegistrationForm = ({onClose, setIsLogin, header}) => {
   const navigate = useNavigate();
 
   const { value: emailValue, handleChange: handleEmailChange } = useInput("");
@@ -40,18 +40,17 @@ const RegistrationForm = () => {
       passwordValue,
       confirmPasswordValue
     );
-    navigate("/");
+    setIsLogin(true)
   }
 
   return <>
-      <div className={styles.content}>
+      
         <div className={styles.content}>
-          <form className={styles.registrationForm} onSubmit={sendRegistration}>
-            <h2>registration form bellissimo</h2>
-            <p>Registrati!</p>
-            {/* <label htmlFor="username">Username</label> 
+          <h2>{header}</h2>
+          <form className={styles.form} onSubmit={sendRegistration}>
+           {/* <label htmlFor="username">Username</label> 
                 <input type="text" id="username" placeholder="Username" value={registrationData.username} onChange={handleChange}></input> */}
-            <label htmlFor="email">E-mail</label>
+            <label htmlFor="email">Email</label>
             <input
               type="text"
               id="email"
@@ -59,11 +58,11 @@ const RegistrationForm = () => {
               value={emailValue}
               onChange={handleEmailChange}>
             </input>
-            <label htmlFor="password">password</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
-              placeholder="la tua password"
+              placeholder="Inserisci la tua password"
               value={passwordValue}
               onChange={handlePasswordChange}>
             </input>
@@ -97,12 +96,11 @@ const RegistrationForm = () => {
           <button
             className="switch-button"
             type="button"
-            onClick={() => navigate("/")}
+            onClick={()=>setIsLogin(true)}
           >
             Loggati!
           </button>
         </div>
-      </div>
     </>
 };
 
