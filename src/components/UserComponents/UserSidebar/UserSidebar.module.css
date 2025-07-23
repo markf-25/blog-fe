@@ -1,0 +1,16 @@
+.module {
+background-color: var(--card-bg);
+border: 1px solid var(--border);
+color: var(--text);
+padding: 1.5rem;
+border-radius: 1rem;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+max-width: 300px;
+height: auto;
+overflow-y: auto;
+transition: 
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}

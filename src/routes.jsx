@@ -1,11 +1,10 @@
 import App from "./App.jsx";
-import AuthLayout from "./components/AuthLayout/AuthLayout";
-import LoginForm from "./components/AuthComponents/LoginForm/LoginForm.jsx";
-import RegistrationForm from "./components/AuthComponents/RegistrationForm/RegistrationForm";
-
 import MainLayout from "./components/MainLayout/MainLayout"
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
+import ResetPasswordPage from "./components/UserComponents/ResetPasswordPage/ResetPasswordPage"
 
 import Counter from "./Counter";
+import UserProfilePage from "./components/UserComponents/UserProfilePage/UserProfilePage.jsx"
 
 export const routes = [
   {
@@ -21,20 +20,21 @@ export const routes = [
             element: <Counter />,
             path: "/",
           },
-        ],
-      },
-      {
-        element: <AuthLayout />,
+          {
+            element: <ResetPasswordPage />,
+            path: "reset-password/",
+          },
+          {
+        element: <ProtectedRoute />,
         children: [
           {
-            element: <LoginForm />,
-          },
-          {
-            path: "registration",
-            element: <RegistrationForm />,
-          },
-        ],
+            element: <UserProfilePage/>,
+            path: "user/",
+          }
+        ]
       }
-    ],
-  },
+        ],
+      },
+    ]
+  }
 ];
