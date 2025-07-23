@@ -1,0 +1,27 @@
+.comment-avatar {
+    height: 63px;
+    width: 63px;
+    border-radius: 50px;
+    object-fit: cover;
+}
+
+.header-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.avatar {
+    height: 200px;
+    width: 200px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.post-image {
+    height: 360px;
+    width: 640px;
+    border-radius: 5px;
+    object-fit: cover;
+}

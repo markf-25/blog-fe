@@ -1,0 +1,24 @@
+.mainDiv {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+grid-template-rows: repeat(5, 1fr);
+gap: 8px;
+}
+
+.sidebar {
+    grid-column: span 2 / span 2;
+    grid-row: span 5 / span 5;
+  height: 30rem; 
+  width: 30rem; 
+  position: fixed; 
+  z-index: 1;
+  top: 70px;
+  left: 0;
+  padding-top: 20px;
+}
+
+.posts {
+    grid-column: span 3 / span 3;
+    grid-row: span 5 / span 5;
+    grid-column-start: 3;
+}

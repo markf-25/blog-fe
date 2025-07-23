@@ -4,8 +4,6 @@ import { Outlet } from "react-router";
 
 
 function MainLayout() {
-
-/*     const USER = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}; */
     
     return(
         <div>
