@@ -1,0 +1,61 @@
+html, body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text);
+}
+
+.detail {
+  max-width: 800px;
+  margin-top: 20vh;
+  padding: 2rem;
+  line-height: 1.6;
+  box-shadow: 0 0 20px (--border);
+  background-color: var(--card-bg);
+  border-radius: 8px;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+
+}
+
+.meta {
+  font-size: 0.9rem;
+
+}
+
+.imageWrapper {
+  margin: 2rem 0;
+}
+
+.content {
+  margin-bottom: 2rem;
+}
+
+.tags ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.tags li {
+  background-color: var(--text);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.3rem;
+  font-size: 0.85rem;
+}
+
+.footer {
+  border-top: 1px solid var(--text);
+  padding-top: 1rem;
+  margin-top: 2rem;
+  font-weight: bold;
+}

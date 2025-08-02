@@ -2,14 +2,19 @@ import useInput from "../../../hooks/useInput.js";
 import {useState} from "react";
 
 import Input from "../../Input/Input.jsx";
+import Toast from "../../Toast/Toast"
 
 import { isNotEmpty, isEmail } from "../../../utils/validators.jsx"
 
 import { requestForANewPassword } from "../../../services/password.service.js"
 
+import styles from "../../Modal/Modal.module.css"
+
 const ResetPasswordRequestForm = ({setIsLogin, setRequestNewPassword, onClose}) => {
 
     const {value: emailValue, handleChange: handleEmailChange} = useInput("");
+
+    const [toastMessage, setToastMessage] = useState("");
 
 
     const [formErrors, setFormErrors] = useState({
@@ -37,24 +42,25 @@ const ResetPasswordRequestForm = ({setIsLogin, setRequestNewPassword, onClose}) 
     const resetRequest = await requestForANewPassword(payload);
         console.log(payload)
         if (resetRequest) {
-            alert("HA FUNZIONATO! Presto ci sarà un magnifico toast")
-            onClose()
+            setToastMessage("Clicca sul link che hai ricevuto via mail per scegliere una nuova password")
+            setTimeout(() => onClose(), 5000);
 
         }
         else {
-            alert("operazione fallita")
+            setToastMessage("Qualcosa è andato storto. Riprova")
         }
     }
 
     return <>
-    <div /* className={styles.content} */>
-            <h2>Scegli la nuova password</h2>
-            <form /* className={styles.form} */ onSubmit={requestPassword}>
-                <Input id="email" label="email" error={formErrors.email} name="email" placeholder="Inserisci la tua email" onChange={handleEmailChange} value={emailValue}/>
+    <div className={styles.content}>
+            <h2 className={styles.header}>Password dimenticata?</h2>
+            <form className={styles.children} onSubmit={requestPassword}>
+                <Input id="email" error={formErrors.email} name="email" placeholder="Inserisci la tua email" onChange={handleEmailChange} value={emailValue}/>
                 <button type="submit" className="submit_button">Richiedi la nuova password</button>
                 <button type="button" className="button" onClick={()=> {setIsLogin(true), setRequestNewPassword(false)}}>Torna al login</button>
             </form>
         </div>
+        {toastMessage && <Toast header="Cambio password" message={toastMessage} onClose={() => setToastMessage("")} />}
         </>
 }
 

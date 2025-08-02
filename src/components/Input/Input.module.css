@@ -1,3 +1,13 @@
 .input {
   width:100%;
+  background-color: white;
+  word-break: break-all;
+}
+
+.richTextInput {
+  height: 25vh;
+  width: 100%;
+  background-color: white;
+  border: 1px solid black;
+  word-break: break-all;
 }

@@ -8,6 +8,7 @@
 .header-avatar {
     height: 40px;
     width: 40px;
+    border: 1px solid var(--image-border);
     border-radius: 10px;
     object-fit: cover;
 }
@@ -15,8 +16,14 @@
 .avatar {
     height: 200px;
     width: 200px;
+    border: 2px solid var(--image-border);
     border-radius: 20px;
     object-fit: cover;
+    transition: box-shadow 0.2s ease;
+}
+
+.avatar:hover {
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .post-image {

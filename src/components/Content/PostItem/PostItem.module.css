@@ -1,0 +1,20 @@
+.item {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 1rem;
+    padding: 1rem;
+    border: solid 1px var(--border);
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    box-shadow: -2px 3px 4px rgba(104, 96, 146, 0.5);
+}
+
+.showDetails {
+    font-style: italic;
+    color: var(--text);
+    border: 1px solid white;
+    background-color: var(--bg);
+    margin: 2px;
+    padding: 4px;
+    cursor: pointer;
+}

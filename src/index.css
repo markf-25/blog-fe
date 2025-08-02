@@ -1,5 +1,5 @@
 #root {
-  --bg: #FFF3E0;
+/*   --bg: #FFF3E0;
   --text: #4E342E;
   --text-secondary: #6D4C41;
   --accent: #F57C00;
@@ -7,9 +7,10 @@
   --border: #E0C097;
   --card-bg: #FFE0B2;
 
-  --error-text: #e53935;
+  --error-text: #e53935; */
 }
 body, html {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
  
   background: var(--background);
   
@@ -25,6 +26,25 @@ body, html {
   align-items: center;
 }
 
+button {
+padding: 0.75rem 1.5rem;
+width: 200px;
+color: var(--text);
+background-color: var(--bg);
+border: 2px solid var(--border);
+border-radius: 0.75rem;
+cursor: pointer;
+transition: 
+    background-color 0.5s ease-in-out,
+    box-shadow 0.3s ease,
+    filter 0.3s ease;
+}
+
+button:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
 body[data-theme='dark'] {
   --bg: #121C2D;
   --text: #E0F7FA;
@@ -32,6 +52,7 @@ body[data-theme='dark'] {
   --accent: #00B8D4;
   --accent2: #2196F3;
   --border: #263238;
+  --image-border: #37474F;
   --card-bg: #37474F;
 
   --error-text: #e53935;
@@ -39,15 +60,16 @@ body[data-theme='dark'] {
 }
 
 body[data-theme='light'] {
-    --bg: #FFF3E0;
-  --text: #4E342E;
-  --text-secondary: #6D4C41;
-  --accent: #F57C00;
-  --accent2: #FF7043;
-  --border: #E0C097;
-  --card-bg: #FFE0B2;
+ --bg: #F3EBFF;
+--text: #3B2B5A;
+--text-secondary: #6C5B7B;
+--accent: #A166FF;
+--accent2: #C89CFF;
+--border: #BFA2E0;
+--image-border: #4A3668;
+--card-bg: #D4C0FF;
 
-  --error-text: #e53935;
+--error-text: #E5396F;  
 }
 
 .main {

@@ -1,4 +1,4 @@
-const usernameFormat = /^[\p{L}\p{N}]+(?: [\p{L}\p{N}]+)*$/u
+const usernameFormat = /^[a-zA-Z0-9]+$/;
 const emailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export function isAlphaNum(name){
@@ -7,6 +7,10 @@ export function isAlphaNum(name){
 
 export function isEmail(email){
     return emailFormat.test(email)
+}
+
+export function hasNoSpaces(value) {
+    return !/\s/.test(value);
 }
 
 export function isNotEmpty(value){
