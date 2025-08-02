@@ -1,8 +1,12 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20rem;
   text-align: center;
+}
+
+.counter {
+  padding-top: 10rem;
+  left: 0px;
 }
 
 .logo {
@@ -33,15 +37,11 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
-
 .read-the-docs {
   color: #888;
 }
 .test {
-  display: flex;
+  display: none;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;

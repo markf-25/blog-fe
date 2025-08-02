@@ -1,18 +1,20 @@
-function Modal({ isOpen, children, onClose }) {
+import styles from "./Modal.module.css";
 
+function Modal({ isOpen, children, onClose, header }) {
   if (!isOpen) return null;
 
   return (
-    <div>
+    <div className={styles.content}>
       <div aria-label="modal" onClick={onClose}>
         <div onClick={(e) => e.stopPropagation()}>
-          <div>
+          <div className={styles.header}>
+            <h2>{header}</h2>
             <div>
-              <button onClick={onClose}>CHIUDI</button>
+              <button className={styles.closebutton} onClick={onClose}>
+                x
+              </button>
             </div>
-            <div>
-              {children}
-            </div>
+            <div className={styles.children}>{children}</div>
           </div>
         </div>
       </div>

@@ -65,8 +65,8 @@ const LoginForm = ({onClose, setRequestNewPassword}) => {
                 <Input id="password" label="Password" error={formErrors.password} name="password" placeholder="Inserisci la tua password"
                        onChange={handlePasswordChange} type="password" value={passwordValue}/>
                 <button type="submit" className="submit_button">Accedi</button>
+                <button type="button" className="button" onClick={()=> setRequestNewPassword(true)}>Password dimenticata?</button>
             </form>
-            <button type="button" className="button" onClick={()=> setRequestNewPassword(true)}>Password dimenticata?</button>
         </div>
         </>
 }

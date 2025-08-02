@@ -1,7 +1,11 @@
 import styles from "../AuthModal/AuthModal.module.css";
+
+import Input from "../../Input/Input"
+import Toast from "../../Toast/Toast"
+
 import useInput from "../../../hooks/useInput.js";
 import { useState } from "react";
-import {isAlphaNum, isEmail, hasMinLength, hasMaxLength, isNotEmpty, areValuesMatching} from "../../../utils/validators.jsx"
+import {isAlphaNum, hasNoSpaces, isEmail, hasMinLength, hasMaxLength, isNotEmpty, areValuesMatching} from "../../../utils/validators.jsx"
 
 import { signUp, usernameAvailable } from "../../../services/registration.service.js"
 
@@ -24,6 +28,9 @@ const RegistrationForm = ({setIsLogin}) => {
         confirmPassword: '',
   });
 
+  const [toastMessage, setToastMessage] = useState("");
+
+
     const handleFormErrorsChange = (key, value) => {
         setRegistrationError(prevState => ({...prevState, [key]: value}));
     }
@@ -37,8 +44,9 @@ const RegistrationForm = ({setIsLogin}) => {
             confirmPassword: '',
         })
 
-        const areUsernameCharactersValid = isNotEmpty(usernameValue) && isAlphaNum(usernameValue)
+        const areUsernameCharactersValid = isNotEmpty(usernameValue) && isAlphaNum(usernameValue) && hasNoSpaces(usernameValue)
         const isUsernameLengthValid = hasMinLength(usernameValue, 3) && hasMaxLength(usernameValue, 30);
+
         const isEmailValid = isNotEmpty(emailValue) && isEmail(emailValue);
         const isPasswordValid = hasMinLength(passwordValue, 8) && hasMaxLength(passwordValue, 60);
         const passwordsMatch = areValuesMatching(passwordValue, confirmPasswordValue);
@@ -78,6 +86,7 @@ const RegistrationForm = ({setIsLogin}) => {
 
       const res = await signUp(payload);
           if(res) {
+            setToastMessage("Registrazione completata con successo \n Attiva l'account con il link che hai ricevuto sulla tua email")
             setIsLogin(true)
           }
       }
@@ -87,31 +96,14 @@ const RegistrationForm = ({setIsLogin}) => {
         <div className={styles.content}>
           <h2>Registrati</h2>
           <form className={styles.form} onSubmit={sendRegistration}>
-          <label htmlFor="username">Username</label> 
-                <input type="text" id="username" placeholder="Username" value={usernameValue} onChange={handleUsernameValueChange}></input>
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              id="email"
-              placeholder="Inserisci un'e-mail"
-              value={emailValue}
-              onChange={handleEmailChange}>
-            </input>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Inserisci la tua password"
-              value={passwordValue}
-              onChange={handlePasswordChange}>
-            </input>
-            <input
-              type="password"
-              id="passwordConfirmed"
-              placeholder="conferma la tua password"
-              value={confirmPasswordValue}
-              onChange={handleConfirmPasswordChange}>
-            </input>
+          <Input id="username" label="Username" error={registrationError.username} name="username" placeholder="Scegli uno username" onChange={handleUsernameValueChange}
+                       type="text" value={usernameValue}/>
+          <Input id="email" label="Email" error={registrationError.email} name="email" placeholder="Inserisci la tua email" onChange={handleEmailChange}
+                       type="text" value={emailValue}/>
+          <Input id="password" label="Password" error={registrationError.password} name="password" placeholder="Scegli una password" onChange={handlePasswordChange}
+                       type="text" value={passwordValue}/>
+          <Input id="passwordConfirmed" label="Password" error={registrationError.passwordConfirmed} name="password" placeholder="Conferma la tua password" onChange={handleConfirmPasswordChange}
+                       type="text" value={confirmPasswordValue}/>  
             <button id="sendingButton" type="submit">
               Invia
             </button>
@@ -124,6 +116,7 @@ const RegistrationForm = ({setIsLogin}) => {
             {registrationError?.confirmPassword && <p>{registrationError.confirmPassword}</p>}
           </div>
         </div>
+        {toastMessage && <Toast header={"Registrazione completata con successo"} message={toastMessage} onClose={() => setToastMessage("")} />}
     </>
 };
 

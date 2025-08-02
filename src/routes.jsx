@@ -2,6 +2,7 @@ import App from "./App.jsx";
 import MainLayout from "./components/MainLayout/MainLayout"
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
 import ResetPasswordPage from "./components/UserComponents/ResetPasswordPage/ResetPasswordPage"
+import PostDetails from "./components/Content/PostDetails/PostDetails"
 
 import Counter from "./Counter";
 import UserProfilePage from "./components/UserComponents/UserProfilePage/UserProfilePage.jsx"
@@ -23,6 +24,10 @@ export const routes = [
           {
             element: <ResetPasswordPage />,
             path: "reset-password/",
+          },
+          {
+            element: <PostDetails />,
+            path: "posts/:id",
           },
           {
         element: <ProtectedRoute />,

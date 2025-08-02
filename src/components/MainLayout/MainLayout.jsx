@@ -2,15 +2,18 @@ import Header from '../Header/Header';
 
 import { Outlet } from "react-router";
 
+import styles from "./MainLayout.module.css"
+
 
 function MainLayout() {
-    
-    return(
-        <div>
-        <Header />
-        <Outlet />
+    return (
+        <div className={styles.layout}>
+            <Header />
+            <div className={styles.content}>
+                <Outlet />
+            </div>
         </div>
-    )
+    );
 }
 
-export default MainLayout
+export default MainLayout;

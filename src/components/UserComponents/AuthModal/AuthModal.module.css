@@ -4,7 +4,7 @@
   left: 0;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.5); /* semi-trasparente */
+  background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   z-index: 1100;
 }
@@ -47,7 +47,10 @@
 }
 
 .form {
-  gap: 1rem;
+  gap: 0.5rem;
+  padding-top: 15px;
+  justify-content: center;
+  align-items: center;
 }
 
 .error {

@@ -4,18 +4,41 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import fallback from "./assets/fallback.jpg"
 
-import {useNavigate} from "react-router"
-
 import Image from "./components/Image/Image"
+import Toast from "./components/Toast/Toast"
+import ContentPage from "./components/Content/ContentPage/ContentPage"
+
+import { removePost } from "./reducers/posts.slice.js"
+import { useDispatch } from "react-redux"
+import useSocketEmit from "./hooks/useSocketEmit.js"
+
+import { useSelector } from "react-redux";
+import { userSelector } from "./reducers/user.slice.js";
 
 const Counter = () => {
   
     const [count, setCount] = useState(0)
-    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const user = useSelector(userSelector)
+
+    const [toastMessage, setToastMessage] = useState("");
+
+    const { deletePost } = useSocketEmit();
+
+
+const post = {
+  title: "PROVA DOPO IL LAZYSTATE",
+  content: "Today I'm gonna non ricordo più il testo di lazysong. Così pigro che non lo cerco neanche. Credo che Bruno Mars sarebbe fiero di me",
+  publishDate: 1853886976359,
+};
+
+
+
 
   return (
     <>
-      <div>
+      <div className="counter">
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -32,9 +55,11 @@ const Counter = () => {
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}         </button>
-          <button onClick={() => navigate("/user")}>
-        USER PROFILE
+          <button onClick={() => setToastMessage("Clicca sul link che hai ricevuto via mail per scegliere una nuova password")}>
+        TOASTESTER
         </button>
+
+        <button onClick={()=> cancelPost({postId: "688c96cee15937484a200810"})}>POST DELETE TEST</button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
@@ -42,6 +67,8 @@ const Counter = () => {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <ContentPage/>
+      {toastMessage && <Toast header="Cambio password" message={toastMessage} onClose={() => setToastMessage("")} />}
     </>
   )
 }
