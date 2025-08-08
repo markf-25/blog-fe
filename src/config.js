@@ -13,14 +13,20 @@ const config = {
                     },
             posts: {
                         get: "posts",
-                        detail: (id) => `posts/${id}`
+                        detail: (id) => `posts/${id}`,
+                        comments: (id) => `posts/${id}/comments`
             }
         },
         socket: {
             actions: {
                         CREATE_POST: "createPost",
                         DELETE_POST: "deletePost",
-                        UPDATE_POST: "updatePost"
+                        UPDATE_POST: "updatePost",
+                        TOGGLE_LIKE: "toggleLike",
+                        GET_TAGS: "getTags",
+                        CREATE_COMMENT: "createComment",
+                        DELETE_COMMENT: "deleteComment",
+                        UPDATE_COMMENT: "updateComment"
             }
         }
     }
@@ -42,7 +48,7 @@ const profileUpdateUrl = config.api.paths.user.profileUpdate
 
 ///Posts/
 const getPostsUrl = config.api.paths.posts.get
-const getSinglePostUrl = config.api.paths.posts
+const postEndpoints = config.api.paths.posts
         
 //User fetches//
 export const registrateUser = databaseUrl + registrationUrl;
@@ -55,12 +61,18 @@ export const profileUpdate = databaseUrl + profileUpdateUrl
 
 //Posts fetches//
 export const retrievePosts = databaseUrl + getPostsUrl
-export const retrieveSinglePost = (id) => databaseUrl + getSinglePostUrl.detail(id);
+export const retrieveSinglePost = (id) => databaseUrl + postEndpoints .detail(id);
+export const retrieveComments = (id) => databaseUrl + postEndpoints .comments(id);
 
 //Socket actions//
 export const createPostAction = config.api.socket.actions.CREATE_POST
 export const deletePostAction = config.api.socket.actions.DELETE_POST
 export const editPostAction = config.api.socket.actions.UPDATE_POST
+export const toggleLikeAction = config.api.socket.actions.TOGGLE_LIKE
+export const getTagsAction = config.api.socket.actions.GET_TAGS
+export const createCommentAction = config.api.socket.actions.CREATE_COMMENT
+export const deleteCommentAction = config.api.socket.actions.DELETE_COMMENT
+export const updateCommentAction = config.api.socket.actions.UPDATE_COMMENT
 
 
 export default config

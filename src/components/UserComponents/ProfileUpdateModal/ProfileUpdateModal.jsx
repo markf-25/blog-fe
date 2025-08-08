@@ -9,7 +9,7 @@ import { editProfile } from "../../../services/profile.service.js";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userSelector, updateUser } from "../../../reducers/user.slice.js";
-import { isAlphaNum, hasMinLength, hasMaxLength, hasNoSpaces } from "../../../utils/validators.jsx"
+import { isAlphaNum, hasMinLength, hasMaxLength, hasNoSpaces, isNotEmpty } from "../../../utils/validators.jsx"
 import { usernameAvailable } from "../../../services/registration.service.js";
 
 const ProfileUpdateModal = ({ isOpen, onClose }) => {
@@ -45,57 +45,68 @@ const ProfileUpdateModal = ({ isOpen, onClose }) => {
   };
 
   const updateProfileDatas = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    handleErrorsChange("username", "", "avatar", "");
+  // Reset errori
+  setUpdatesErrors({ username: "", avatar: "" });
 
-    const areBothInputEmpty = usernameValue === "" && avatarUrlValue === ""
-    const usernameIsEmpty = usernameValue === ""
-    
-    if (areBothInputEmpty) {
+  const username = usernameValue.trim();
+  const avatar = avatarUrlValue.trim();
+
+  const nothingChanged = username === "" && avatar === "";
+  if (nothingChanged) {
+    onClose();
+    return;
+  }
+
+  if (isNotEmpty(username)) {
+    const usernameValid =
+      isAlphaNum(username) &&
+      hasNoSpaces(username) &&
+      hasMinLength(username, 3) &&
+      hasMaxLength(username, 30);
+
+    if (!usernameValid) {
+      handleErrorsChange(
+        "username",
+        "Inserisci uno username fra i 3 e i 30 caratteri alfanumerici, senza spazi"
+      );
+      return;
+    }
+
+    if (username !== currentUsername) {
+      const { available } = await usernameAvailable(username);
+      if (!available) {
+        handleErrorsChange("username", "Username non disponibile");
+        return;
+      }
+    }
+  }
+
+  if (isNotEmpty(avatar)) {
+    if (!hasMaxLength(avatar, 100)) {
+      handleErrorsChange("avatar", "L’URL dell’avatar è troppo lungo");
+      return;
+    }
+  }
+
+  const payload = {
+    username: isNotEmpty(username) ? username : currentUsername,
+    avatar: isNotEmpty(avatar) ? avatar : currentAvatar,
+    token: accessToken,
+  };
+
+  try {
+    const profileUpdated = await editProfile(payload);
+    if (profileUpdated) {
+      dispatch(updateUser(profileUpdated));
       onClose();
     }
+  } catch (error) {
+    console.error("Errore durante l'aggiornamento del profilo:", error);
+  }
+};
 
-    const areUsernameCharactersValid = isAlphaNum(usernameValue) && hasNoSpaces(usernameValue)
-    const isUsernameLengthValid = hasMinLength(usernameValue, 3) && hasMaxLength(usernameValue, 30);
-    
-    if(!usernameIsEmpty){
-    if(!areUsernameCharactersValid || !isUsernameLengthValid){
-        handleErrorsChange('username', `Inserisci uno username fra i 3 e i 30 caratteri alfanumerici, senza spazi`);
-        return
-        }
-    }
-
-
-    if(usernameValue !== currentUsername && !usernameIsEmpty) {
-
-        const usernameChosen = await usernameAvailable(usernameValue)
-
-          if(!usernameChosen.available) {
-            handleErrorsChange('username', 'Username non disponibile');
-            return
-          }
-    }
-
-    const payload = {
-      username: usernameValue !== "" ? usernameValue : currentUsername,
-      avatar: avatarUrlValue !== "" ? avatarUrlValue : currentAvatar,
-      token: accessToken
-    };
-
-    console.log("ECCO IL PAYLOAD", payload);
-
-    try {
-      const profileUpdated = await editProfile(payload);
-
-      if (profileUpdated) {
-        dispatch(updateUser(profileUpdated));
-        onClose();
-      }
-    } catch (error) {
-      console.error("Errore durante l'aggiornamento del profilo:", error);
-    }
-  };
 
   return (
     <>

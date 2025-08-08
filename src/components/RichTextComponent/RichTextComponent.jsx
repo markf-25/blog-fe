@@ -1,6 +1,6 @@
 import styles from "../Input/Input.module.css"; 
 
-const RichTextInput = ({ id, label, ref, onInput }) => {
+const RichTextComponent = ({ id, label, ref, onInput }) => {
 
   const toggleStyle = (style) => {
     let command = "";
@@ -34,13 +34,36 @@ const RichTextInput = ({ id, label, ref, onInput }) => {
         />
       </div>
 
-      <div>
-        <button type="button" onClick={() => toggleStyle("b")}>Grassetto</button>
-        <button type="button" onClick={() => toggleStyle("i")}>Corsivo</button>
-        <button type="button" onClick={() => toggleStyle("u")}>Sottolineato</button>
+      <div className={styles.styleWrapper}>
+        <button
+  type="button"
+  className={styles.styleChanger}
+  style={{ fontWeight: "bold" }}
+  onClick={() => toggleStyle("b")}
+>
+  B
+</button>
+
+<button
+  type="button"
+  className={styles.styleChanger}
+  style={{ fontStyle: "italic" }}
+  onClick={() => toggleStyle("i")}
+>
+  I
+</button>
+
+<button
+  type="button"
+  className={styles.styleChanger}
+  style={{ textDecoration: "underline" }}
+  onClick={() => toggleStyle("u")}
+>
+  S
+</button>
       </div>
     </>
   );
 };
 
-export default RichTextInput;
+export default RichTextComponent;

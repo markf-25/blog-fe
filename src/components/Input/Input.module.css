@@ -11,3 +11,24 @@
   border: 1px solid black;
   word-break: break-all;
 }
+
+.styleWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  padding: 0 10px;
+}
+
+.styleChanger {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 10px;
+}

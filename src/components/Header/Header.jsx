@@ -1,6 +1,6 @@
 import styles from "./Header.module.css"
 import { ThemeContext } from "../../contexts/ThemeProvider.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { useState, useContext, useEffect } from "react";
 
@@ -21,17 +21,20 @@ const Header = () => {
 
     const user = useSelector(userSelector)
     const dispatch = useDispatch()
+    const location = useLocation();
+const isUserPage = location.pathname === "/user";
 
     console.log("Il tuo user prima del login", user)
     
     const [openModal, setOpenModal] = useState(false);
 
-
     const navigate = useNavigate();
 
     const logout = () => {
         dispatch(clearUser())
+        if(!isUserPage){
         navigate("/")
+        }
     }
 
     useEffect(() => {

@@ -4,7 +4,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
 import ResetPasswordPage from "./components/UserComponents/ResetPasswordPage/ResetPasswordPage"
 import PostDetails from "./components/Content/PostDetails/PostDetails"
 
-import Counter from "./Counter";
+import ContentPage from "./components/Content/ContentPage/ContentPage"
 import UserProfilePage from "./components/UserComponents/UserProfilePage/UserProfilePage.jsx"
 
 export const routes = [
@@ -18,7 +18,7 @@ export const routes = [
         children: [
           {
             index: true,
-            element: <Counter />,
+            element: <ContentPage />,
             path: "/",
           },
           {

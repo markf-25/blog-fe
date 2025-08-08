@@ -108,13 +108,6 @@ const RegistrationForm = ({setIsLogin}) => {
               Invia
             </button>
           </form>
-
-          <div className={styles.error}>
-            {registrationError?.username && <p>{registrationError.username}</p>}
-            {registrationError?.email && <p>{registrationError.email}</p>}
-            {registrationError?.password && <p>{registrationError.password}</p>}
-            {registrationError?.confirmPassword && <p>{registrationError.confirmPassword}</p>}
-          </div>
         </div>
         {toastMessage && <Toast header={"Registrazione completata con successo"} message={toastMessage} onClose={() => setToastMessage("")} />}
     </>
