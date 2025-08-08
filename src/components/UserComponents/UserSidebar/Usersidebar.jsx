@@ -1,8 +1,6 @@
 import Image from "../../Image/Image.jsx"
 import ProfileUpdateModal from "../ProfileUpdateModal/ProfileUpdateModal"
 
-import {useSelector} from "react-redux";
-import {userSelector} from "../../../reducers/user.slice.js"
 import { useState } from "react";
 import {createPortal} from "react-dom";
 
@@ -10,8 +8,8 @@ import styles from "./UserSidebar.module.css"
 
 import { MdSettings } from "react-icons/md";
 
-const UserSidebar = () => {
-    const user = useSelector(userSelector)
+const UserSidebar = ({user}) => {
+    
     const [changeUsername, setChangeUsername] = useState(true);
     const [openModal, setOpenModal] = useState(false);
 

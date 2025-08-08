@@ -1,24 +1,25 @@
 .mainDiv {
-display: grid;
-grid-template-columns: repeat(5, 1fr);
-grid-template-rows: repeat(5, 1fr);
-gap: 8px;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  padding-top: 70px;
 }
 
 .sidebar {
-    grid-column: span 2 / span 2;
-    grid-row: span 5 / span 5;
-  height: 30rem; 
-  width: 30rem; 
-  position: fixed; 
-  z-index: 1;
+  position: fixed;
   top: 70px;
   left: 0;
-  padding-top: 20px;
+  width: 300px;
+  height: calc(100vh - 70px);
+  padding: 1rem;
+  overflow-y: auto;
+  border-right: 1px solid var(--border-color);
+  z-index: 1;
 }
 
 .posts {
-    grid-column: span 3 / span 3;
-    grid-row: span 5 / span 5;
-    grid-column-start: 3;
+  margin-left: 300px;
+  padding: 2rem;
+  flex: 1;
+  overflow-x: hidden;
 }

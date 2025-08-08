@@ -1,29 +1,14 @@
 #root {
-/*   --bg: #FFF3E0;
-  --text: #4E342E;
-  --text-secondary: #6D4C41;
-  --accent: #F57C00;
-  --accent2: #FF7043;
-  --border: #E0C097;
-  --card-bg: #FFE0B2;
-
-  --error-text: #e53935; */
+  height: 100vh;
 }
 body, html {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
  
   background: var(--background);
-  
-  height: 100%;
-  width: 100%;
   margin: 0;
   padding: 0;
 
-  display: flex;
-  flex-direction: column;
-  align-content: space-around;
-  justify-content: center;
-  align-items: center;
+  box-sizing: border-box;
 }
 
 button {

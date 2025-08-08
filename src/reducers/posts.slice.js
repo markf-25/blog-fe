@@ -44,3 +44,8 @@ export const {
 export const postsSelector = (state) => state.posts.posts
 
 export const postsFullState = (state) => state.posts;
+
+export const postsPagination = (state) => {
+  const { cursor, direction, limit, nextCursor, prevCursor } = state.posts;
+  return { cursor, direction, limit, nextCursor, prevCursor };
+};

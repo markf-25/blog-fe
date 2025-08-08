@@ -1,61 +1,129 @@
-html, body {
+html {
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--text);
+  height: 100%;
+  width: 100%;
+}
+
+.commentBody {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .detail {
-  max-width: 800px;
-  margin-top: 20vh;
+  margin-top: 82px;
   padding: 2rem;
   line-height: 1.6;
   box-shadow: 0 0 20px (--border);
   background-color: var(--card-bg);
   border-radius: 8px;
+  width: 50vw;
+  height: 78vh;
+  border: 5px double var(--bg);
 }
 
 .header {
-  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header p {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
 }
 
 .title {
   font-size: 2rem;
-  margin-bottom: 0.5rem;
-
-}
-
-.meta {
-  font-size: 0.9rem;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .imageWrapper {
   margin: 2rem 0;
+  max-width: 20vw;
 }
 
 .content {
   margin-bottom: 2rem;
+  overflow-y: auto;
+  max-height: 80px;
+  padding: 10px 5px;
+  margin-top: -15px;
+  background-color: var(--bg);
+  border-radius: 8px;
+  
 }
 
 .tags ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.1rem;
   list-style: none;
   padding: 0;
 }
 
 .tags li {
-  background-color: var(--text);
   padding: 0.3rem 0.6rem;
-  border-radius: 0.3rem;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  text-align: center;
 }
 
-.footer {
-  border-top: 1px solid var(--text);
+.likesWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.commentsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 1rem;
+
   padding-top: 1rem;
   margin-top: 2rem;
   font-weight: bold;
+  max-width: 33vw;
+  height: 70vh;
+}
+
+.editDeletePost{
+  position: fixed;
+  bottom: 12px;
+
+  height: 50px;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.editButton, .deleteButton{
+opacity: 0.4; /* Semitrasparente di default */
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.editButton:hover, .deleteButton:hover{
+  opacity: 1;
 }

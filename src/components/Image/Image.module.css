@@ -27,8 +27,8 @@
 }
 
 .post-image {
-    height: 360px;
-    width: 640px;
+   width: 50vw;
+   height: 30vh;
     border-radius: 5px;
     object-fit: cover;
 }

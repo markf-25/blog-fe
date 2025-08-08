@@ -908,7 +908,7 @@ The repository interacts directly with the database. It uses `commentSchema.find
 {
   _id: "6843ff6d4d8a3d68158edea5",
   postId: "6843ff6d4d8a3d68158ede9c",
-  authorId: "6843ff6d4d8a3d68158ede9b",
+  comments: "6843ff6d4d8a3d68158ede9b",
   text: "This is a test comment",
   created_at: "2025-06-07T08:59:30.909Z",
 }

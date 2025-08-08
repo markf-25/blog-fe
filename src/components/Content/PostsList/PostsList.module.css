@@ -1,6 +1,5 @@
 .list {
-    display: flex;
-    flex-flow: column nowrap;
+    display: grid;
     gap: 2rem;
     overflow-y: auto;
 }

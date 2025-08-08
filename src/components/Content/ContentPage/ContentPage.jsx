@@ -11,6 +11,7 @@ import useSocketEmit from "../../../hooks/useSocketEmit.js";
 import PostsList from "../PostsList/PostsList";
 import PostModal from "../PostModal/PostModal";
 
+
 const ContentPage = () => {
   const dispatch = useDispatch();
 
@@ -21,8 +22,9 @@ const ContentPage = () => {
   const [lazyState, setLazyState] = useState({
     cursor: null,
     direction: "prev",
-    limit: 100,
+    limit: 10,
   });
+
 
   const { socket, socketReady } = useContext(SocketContext);
   const posts = useSelector(postsSelector);
@@ -33,6 +35,13 @@ const ContentPage = () => {
     if (data) {
       console.log("I DATA DEL RETRIEVE", data);
       dispatch(setPosts(data));
+
+      setLazyState((prev) => ({
+      ...prev,
+      nextCursor: data.nextCursor,
+      prevCursor: data.prevCursor,
+    }));
+
     }
   };
 
@@ -44,15 +53,22 @@ const ContentPage = () => {
         .catch((error) => console.error(error));
     }
   };
-  useEffect(() => {
-    console.log("LANCIO EFFECT");
-    retrievePosts();
-    console.log("ECCO I POST", posts);
-  }, [socketReady, socket]);
 
-  return (
+useEffect(() => {
+  if (!socketReady) return;
+
+  retrievePosts();
+}, [socketReady, socket]);
+
+  return <>
     <div className={styles.content}>
-      <button onClick={() => setIsModalOpened(true)}>AGGIUNGI POST</button>
+      <button
+        className={styles.addPostButton}
+        onClick={() => setIsModalOpened(true)}
+      >
+        AGGIUNGI POST
+      </button>
+
       {isModalOpened &&
         createPortal(
           <PostModal
@@ -62,9 +78,11 @@ const ContentPage = () => {
           />,
           document.body
         )}
-      {<PostsList posts={posts} />}
+      <PostsList posts={posts} />
     </div>
-  );
+    
+  </>
+
 };
 
 export default ContentPage;

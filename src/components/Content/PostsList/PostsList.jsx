@@ -1,23 +1,23 @@
 import PostItem from "../PostItem/PostItem"
 import styles from "./PostsList.module.css"
 
-const PostsList = ({posts, /* onLoadMore, hideButton */}) => {
+const PostsList = ({ posts, authorId = null }) => {
+  
+    const filteredPosts = authorId
+    ? posts.filter(post => post.authorId === authorId)
+    : posts;
 
-/*     const loadMoreHandler = () => {
-        onLoadMore();
-    } */
-
-    return (
-        <div className={styles.list}>
-            {posts?
-                posts.map(post => (
-                    <PostItem post={post}/>
-                )) : <div>Nessuno ha ancora postato nulla</div>}
-            <div className="Qualcosa">
-                {/* {!hideButton && <button className="text" onClick={loadMoreHandler}>Vedi altri post;</button>} */}
-            </div>
-        </div>
-    )
-}
+  return <>
+    <div className={styles.list}>
+      {filteredPosts && filteredPosts.length > 0 ? (
+        filteredPosts.map(post => (
+          <PostItem post={post} key={post.id} />
+        ))
+      ) : (
+        <div>Nessuno ha ancora postato nulla</div>
+      )}
+    </div>
+  </>;
+};
 
 export default PostsList;
