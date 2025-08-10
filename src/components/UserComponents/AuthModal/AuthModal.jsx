@@ -1,49 +1,87 @@
-import Modal from "../../Modal/Modal";
+import { useState } from "react";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+
 import LoginForm from "../LoginForm/LoginForm";
-import RegistrationForm from "../RegistrationForm/RegistrationForm"
-import ResetPasswordRequestForm from "../ResetPasswordRequestForm/ResetPasswordRequestForm"
-import styles from "./AuthModal.module.css"
+import RegistrationForm from "../RegistrationForm/RegistrationForm";
+import ResetPasswordRequestForm from "../ResetPasswordRequestForm/ResetPasswordRequestForm";
 
-import {useState} from "react";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  borderRadius: 2,
+  boxShadow: 24,
+  p: 4,
+  outline: "none",
+};
 
-const AuthModal = ({isOpen, onClose}) => {
-    
-  const [isLogin, setIsLogin] = useState(true)
-  const [requestNewPassword, setRequestNewPassword] = useState(false)
+const AuthModal = ({ isOpen, onClose }) => {
+  const [isLogin, setIsLogin] = useState(true);
+  const [requestNewPassword, setRequestNewPassword] = useState(false);
 
-  const onCloseHandler = () =>{
-    setIsLogin(true)
-    onClose()
-  }
-    
-    return <>
-      <div className={styles.overlay} onClick={onClose} />
-      <div className={styles.modal}>
-        <Modal isOpen={isOpen} onClose={onCloseHandler}>
-          {isLogin && !requestNewPassword && <>
-          <LoginForm onClose={onCloseHandler} setRequestNewPassword={setRequestNewPassword}/>
-          <div className={styles.switch}>
-          <p>Non sei registrato?</p>
-          <button className="switch-button" type="button" onClick={() => setIsLogin(false)}>Registrati!</button>
-          </div>
-          </>}
-          {!isLogin && !requestNewPassword && <><RegistrationForm setIsLogin={setIsLogin}/>
-            <div className={styles.switch}>
-          <p>Hai già un account?</p>
-          <button
-            className="switch-button"
-            type="button"
-            onClick={()=> setIsLogin(true)}
-          >
-            Loggati!
-          </button>
-        </div>
-        </>}
-        {requestNewPassword && <ResetPasswordRequestForm setIsLogin={setIsLogin} setRequestNewPassword={setRequestNewPassword} onClose={onCloseHandler}/>}
+  const onCloseHandler = () => {
+    setIsLogin(true);
+    setRequestNewPassword(false);
+    onClose();
+  };
 
-        </Modal>
-      </div>
-    </>
-}
+  return (
+    <Modal open={isOpen} onClose={onCloseHandler} aria-labelledby="auth-modal-title">
+      <Box sx={style}>
+        {isLogin && !requestNewPassword && (
+          <>
+            <LoginForm onClose={onCloseHandler} setRequestNewPassword={setRequestNewPassword} />
+            <Box mt={2} textAlign="center">
+              <Typography variant="body2" display="inline" mr={1}>
+                Non sei registrato?
+              </Typography>
+              <Button
+                variant="text"
+                onClick={() => setIsLogin(false)}
+                size="small"
+                sx={{ textTransform: "none" }}
+              >
+                Registrati!
+              </Button>
+            </Box>
+          </>
+        )}
 
-export default AuthModal
+        {!isLogin && !requestNewPassword && (
+          <>
+            <RegistrationForm setIsLogin={setIsLogin} />
+            <Box mt={2} textAlign="center">
+              <Typography variant="body2" display="inline" mr={1}>
+                Hai già un account?
+              </Typography>
+              <Button
+                variant="text"
+                onClick={() => setIsLogin(true)}
+                size="small"
+                sx={{ textTransform: "none" }}
+              >
+                Loggati!
+              </Button>
+            </Box>
+          </>
+        )}
+
+        {requestNewPassword && (
+          <ResetPasswordRequestForm
+            setIsLogin={setIsLogin}
+            setRequestNewPassword={setRequestNewPassword}
+            onClose={onCloseHandler}
+          />
+        )}
+      </Box>
+    </Modal>
+  );
+};
+
+export default AuthModal;

@@ -1,25 +1,25 @@
-import FormField from "../FormField/FormField.jsx";
-import styles from "./Input.module.css";
+import TextField from "@mui/material/TextField";
 
 const Input = ({ id, label, error, onEnter, ...props }) => {
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && typeof onEnter === "function") {
+      e.preventDefault();
+      onEnter(e);
+    }
+  };
 
-    const handleEnter = (e) => {
-        if (e.key === "Enter" && typeof onEnter === "function") {
-            e.preventDefault();
-            onEnter(e);
-        }
-    };
-
-    return (
-        <FormField id={id} label={label} error={error}>
-            <input
-                className={styles.input}
-                id={id}
-                onKeyDown={handleEnter}
-                {...props}
-            />
-        </FormField>
-    );
+  return (
+    <TextField
+      id={id}
+      label={label}
+      error={!!error}
+      helperText={error || ""}
+      onKeyDown={handleKeyDown}
+      fullWidth
+      variant="outlined"
+      {...props}
+    />
+  );
 };
 
 export default Input;

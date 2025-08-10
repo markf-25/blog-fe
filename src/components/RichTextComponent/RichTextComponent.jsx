@@ -1,6 +1,5 @@
-import styles from "../Input/Input.module.css"; 
-
-const RichTextComponent = ({ id, label, ref, onInput }) => {
+const RichTextComponent = ({ id, label, ref, onInput, error }) => {
+  
 
   const toggleStyle = (style) => {
     let command = "";
@@ -22,45 +21,44 @@ const RichTextComponent = ({ id, label, ref, onInput }) => {
 
   return (
     <>
-      <div className={styles.formField}>
+      <div className="formField">
         {label && <label htmlFor={id}>{label}</label>}
         <div
           id={id}
-          className={styles.richTextInput}
+          className="richTextInput"
           contentEditable
           suppressContentEditableWarning={true}
           onInput={onInput}
           ref={ref}
         />
       </div>
+      {error && <div className="errorMessage">{error}</div>}
 
-      <div className={styles.styleWrapper}>
+      <div className="styleWrapper">
         <button
-  type="button"
-  className={styles.styleChanger}
-  style={{ fontWeight: "bold" }}
-  onClick={() => toggleStyle("b")}
->
-  B
-</button>
-
-<button
-  type="button"
-  className={styles.styleChanger}
-  style={{ fontStyle: "italic" }}
-  onClick={() => toggleStyle("i")}
->
-  I
-</button>
-
-<button
-  type="button"
-  className={styles.styleChanger}
-  style={{ textDecoration: "underline" }}
-  onClick={() => toggleStyle("u")}
->
-  S
-</button>
+          type="button"
+          className="styleChanger"
+          onClick={() => toggleStyle("b")}
+          aria-label="Bold"
+        >
+          B
+        </button>
+        <button
+          type="button"
+          className="styleChanger"
+          onClick={() => toggleStyle("i")}
+          aria-label="Italic"
+        >
+          I
+        </button>
+        <button
+          type="button"
+          className="styleChanger"
+          onClick={() => toggleStyle("u")}
+          aria-label="Underline"
+        >
+          S
+        </button>
       </div>
     </>
   );

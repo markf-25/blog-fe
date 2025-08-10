@@ -1,4 +1,4 @@
-import Modal from "../../Modal/Modal.jsx";
+/* import Modal from "../../Modal/Modal.jsx";
 
 import Input from "../../Input/Input.jsx";
 
@@ -33,3 +33,4 @@ const CommentModal = ({ isOpen, onClose, existingComment }) => {
 };
 
 export default CommentModal;
+ */

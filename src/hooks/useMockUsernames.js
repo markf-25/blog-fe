@@ -6,7 +6,8 @@ const useMockUsernames = () => {
     "687b488e1e886df381f3d6d5": "Luca Atzeni",
     "687a6acc1e886df381f39a37": "Miguel Tanda",
     "687b5c901e886df381f3dc2e" : "Pierluigi Mattana",
-    "687b75081e886df381f3e284" : "Emanuele Songini"
+    "687b75081e886df381f3e284" : "Emanuele Songini",
+    "687fbd2d320c5674fca1ce73" : "Paola Peruzzi"
   };
 
   const getUsernameById = (id) => users[id] || null;

@@ -1,67 +1,82 @@
+import { useState } from "react";
+import { TextField, Button, Box, Typography } from "@mui/material";
+
 import useInput from "../../../hooks/useInput.js";
-import {useState} from "react";
+import Toast from "../../Toast/Toast";
 
-import Input from "../../Input/Input.jsx";
-import Toast from "../../Toast/Toast"
+import { isNotEmpty, isEmail } from "../../../utils/validators.jsx";
+import { requestForANewPassword } from "../../../services/password.service.js";
 
-import { isNotEmpty, isEmail } from "../../../utils/validators.jsx"
+const ResetPasswordRequestForm = ({ setIsLogin, setRequestNewPassword, onClose }) => {
+  const { value: emailValue, handleChange: handleEmailChange } = useInput("");
 
-import { requestForANewPassword } from "../../../services/password.service.js"
+  const [toastMessage, setToastMessage] = useState("");
+  const [formErrors, setFormErrors] = useState({ email: "" });
 
-import styles from "../../Modal/Modal.module.css"
-
-const ResetPasswordRequestForm = ({setIsLogin, setRequestNewPassword, onClose}) => {
-
-    const {value: emailValue, handleChange: handleEmailChange} = useInput("");
-
-    const [toastMessage, setToastMessage] = useState("");
-
-
-    const [formErrors, setFormErrors] = useState({
-        email: '',
-    });
-
-    const requestPassword = async (event) => {
+  const requestPassword = async (event) => {
     event.preventDefault();
-    
-    setFormErrors({
-        email: ''
-        })
-    
+
+    setFormErrors({ email: "" });
+
     const isEmailValid = isNotEmpty(emailValue) && isEmail(emailValue);
 
-    if(!isEmailValid) {
-          setFormErrors('email', "L'email deve avere un formato valido");
-          return
-        }        
-
-    const payload = {
-            email: emailValue
-        }
-
-    const resetRequest = await requestForANewPassword(payload);
-        console.log(payload)
-        if (resetRequest) {
-            setToastMessage("Clicca sul link che hai ricevuto via mail per scegliere una nuova password")
-            setTimeout(() => onClose(), 5000);
-
-        }
-        else {
-            setToastMessage("Qualcosa è andato storto. Riprova")
-        }
+    if (!isEmailValid) {
+      setFormErrors({ email: "L'email deve avere un formato valido" });
+      return;
     }
 
-    return <>
-    <div className={styles.content}>
-            <h2 className={styles.header}>Password dimenticata?</h2>
-            <form className={styles.children} onSubmit={requestPassword}>
-                <Input id="email" error={formErrors.email} name="email" placeholder="Inserisci la tua email" onChange={handleEmailChange} value={emailValue}/>
-                <button type="submit" className="submit_button">Richiedi la nuova password</button>
-                <button type="button" className="button" onClick={()=> {setIsLogin(true), setRequestNewPassword(false)}}>Torna al login</button>
-            </form>
-        </div>
-        {toastMessage && <Toast header="Cambio password" message={toastMessage} onClose={() => setToastMessage("")} />}
-        </>
-}
+    const payload = { email: emailValue };
 
-export default ResetPasswordRequestForm
+    const resetRequest = await requestForANewPassword(payload);
+    console.log(payload);
+
+    if (resetRequest) {
+      setToastMessage("Clicca sul link che hai ricevuto via mail per scegliere una nuova password");
+      setTimeout(() => onClose(), 5000);
+    } else {
+      setToastMessage("Qualcosa è andato storto. Riprova");
+    }
+  };
+
+  return (
+    <>
+      <Box component="form" onSubmit={requestPassword} noValidate sx={{ mt: 1 }}>
+        <Typography variant="h5" mb={2}>
+          Password dimenticata?
+        </Typography>
+
+        <TextField
+          fullWidth
+          id="email"
+          label="Email"
+          margin="normal"
+          type="email"
+          value={emailValue}
+          onChange={handleEmailChange}
+          error={Boolean(formErrors.email)}
+          helperText={formErrors.email}
+        />
+
+        <Button type="submit" variant="contained" fullWidth sx={{ mt: 3, mb: 1 }}>
+          Richiedi la nuova password
+        </Button>
+
+        <Button
+          type="button"
+          variant="text"
+          fullWidth
+          onClick={() => {
+            setIsLogin(true);
+            setRequestNewPassword(false);
+          }}
+        >
+          Torna al login
+        </Button>
+      </Box>
+
+      {toastMessage && <Toast header="Cambio password" message={toastMessage} onClose={() => setToastMessage("")} />}
+    </>
+  );
+};
+
+export default ResetPasswordRequestForm;

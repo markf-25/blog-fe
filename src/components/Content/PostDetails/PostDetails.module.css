@@ -1,12 +1,7 @@
 html {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--text);
-  height: 100%;
-  width: 100%;
+margin-top: 30px;
 }
-
+/* 
 .commentBody {
   display: flex;
   flex-direction: row;
@@ -81,6 +76,12 @@ html {
   text-align: center;
 }
 
+.bottomSection{
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
 .likesWrapper {
   display: flex;
   flex-direction: row;
@@ -102,28 +103,30 @@ html {
   height: 70vh;
 }
 
-.editDeletePost{
-  position: fixed;
-  bottom: 12px;
-
-  height: 50px;
-  width: auto;
+.editDeletePost {
   display: flex;
-  flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: flex-start;
   gap: 2rem;
+  margin-top: 1rem;
+  width: 100%;
 }
 
-.editButton, .deleteButton{
-opacity: 0.4; /* Semitrasparente di default */
-  transition: opacity 0.3s ease-in-out;
+
+.editButton,
+.deleteButton {
+  color: var(--text);
+  transition: color 0.3s ease-in-out;
   z-index: 1000;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
 }
 
-.editButton:hover, .deleteButton:hover{
-  opacity: 1;
+.editButton:hover,
+.deleteButton:hover {
+  color: var(--text-muted);
 }
+ */

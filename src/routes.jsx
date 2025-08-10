@@ -7,6 +7,8 @@ import PostDetails from "./components/Content/PostDetails/PostDetails"
 import ContentPage from "./components/Content/ContentPage/ContentPage"
 import UserProfilePage from "./components/UserComponents/UserProfilePage/UserProfilePage.jsx"
 
+import Counter from "./Counter"
+
 export const routes = [
   {
     path: "/",
@@ -29,6 +31,10 @@ export const routes = [
             element: <PostDetails />,
             path: "posts/:id",
           },
+/*           {
+            element: <Counter />,
+            path: "playroom/",
+          }, */
           {
         element: <ProtectedRoute />,
         children: [
@@ -36,6 +42,7 @@ export const routes = [
             element: <UserProfilePage/>,
             path: "user/",
           }
+          
         ]
       }
         ],
