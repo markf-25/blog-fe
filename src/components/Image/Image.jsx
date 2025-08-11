@@ -45,7 +45,7 @@ const Image = ({
   ...props
 }) => {
   const fallbackImage =
-    "https://i.pinimg.com/564x/bf/c7/89/bfc78969a1d4026e4b7afd1dce0d7a42.jpg";
+    "https://storage.googleapis.com/pod_public/1300/275627.jpg";
 
   const imagePath = src || fallbackImage;
 

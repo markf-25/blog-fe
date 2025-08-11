@@ -9,6 +9,7 @@ import useSocketEmit from "../../../hooks/useSocketEmit.js";
 import PostsList from "../PostsList/PostsList";
 import PostModal from "../PostModal/PostModal";
 
+
 import { keyframes } from "@mui/system";
 
 const ContentPage = () => {
@@ -24,7 +25,7 @@ const ContentPage = () => {
     box-shadow: 0px 4px 12px rgba(25, 118, 210, 0.4);
   }
 `;
-const firstPostId = "684b0f02f5b962f22eb945a1"
+/* const firstPostId = "684b0f02f5b962f22eb945a1" */
 
   const dispatch = useDispatch();
   const { createPost } = useSocketEmit();
@@ -32,11 +33,12 @@ const firstPostId = "684b0f02f5b962f22eb945a1"
   const [lazyState, setLazyState] = useState({
     cursor: null,
     direction: "prev",
-    limit: 50,
+    limit: 10,
   });
 
   const { socket, socketReady } = useContext(SocketContext);
   const posts = useSelector(postsSelector);
+
 
   const retrievePosts = async () => {
     const data = await getPosts(lazyState);
@@ -64,10 +66,10 @@ const firstPostId = "684b0f02f5b962f22eb945a1"
   useEffect(() => {
     if (!socketReady) return;
     retrievePosts();
-  }, [socketReady, socket, lazyState.cursor]);
+  }, [socketReady, socket]);
 
-  const isAtStart = !lazyState.prevCursor || posts.length < lazyState.limit;
-  const isAtEnd = !lazyState.nextCursor || posts.length < lazyState.limit;
+
+
 
   return (
     <Box
@@ -113,6 +115,7 @@ const firstPostId = "684b0f02f5b962f22eb945a1"
 >
   AGGIUNGI POST
 </Button>
+
       {isModalOpened &&
         createPortal(
           <PostModal

@@ -35,7 +35,7 @@ useEffect(() => {
 }, [existingPost, setRichContentValue]);
 
   useEffect(() => {
-    // debug / utile durante il testing
+    
     console.log("I TAG IN LISTA", tagsArray);
   }, [tagsArray]);
 
@@ -45,7 +45,8 @@ useEffect(() => {
 
   const [postErrors, setPostErrors] = useState({
     title: "",
-    content: ""
+    content: "",
+    general: "",
   });
 
 
@@ -56,7 +57,7 @@ useEffect(() => {
   const savePost = (event) => {
     event.preventDefault();
 
-    handlePostErrorsChange({title: "", content: ""})
+    handlePostErrorsChange({title: "", content: "", general: ""})
 
     const minTitleLength = 3
     const minContentLength = 10
