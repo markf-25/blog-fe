@@ -6,6 +6,7 @@ import { userSelector } from "../../../reducers/user.slice.js"
 import { getComments } from "../../../services/post.service.js"
 import useSocketEmit from "../../../hooks/useSocketEmit.js";
 import CommentItem from "../CommentItem/CommentItem.jsx"
+import ConfirmDialog from "../../ConfirmDialog/ConfirmDialog"
 
 import useInput from "../../../hooks/useInput.js"
 
@@ -22,6 +23,11 @@ const CommentsSection = ({postId}) => {
     cursor: null,
     direction: "prev",
     limit: 100,
+  });
+
+  const [confirmDialog, setConfirmDialog] = useState({
+    open: false,
+    commentId: null,
   });
 
   const retrieveComments = async (postId) => {
@@ -50,8 +56,7 @@ const CommentsSection = ({postId}) => {
   }
 
   const commentElimination = async (commentId) => {
-    const conferma = window.confirm("Sei sicuro di voler eliminare il commento?");
-  if (!conferma) return;
+  
   try {
     console.log("ID comment", commentId);
     const data = await deleteComment(commentId);
@@ -63,6 +68,19 @@ const CommentsSection = ({postId}) => {
     console.error("Errore nell'eliminazione commento:", error);
   }
 };
+
+const handleDeleteClick = (commentId) => {
+    setConfirmDialog({ open: true, commentId });
+  };
+
+  const handleConfirm = () => {
+    commentElimination(confirmDialog.commentId);
+    setConfirmDialog({ open: false, commentId: null });
+  };
+
+  const handleCancel = () => {
+    setConfirmDialog({ open: false, commentId: null });
+  };
 
     useEffect(()=>{
         retrieveComments(postId)
@@ -81,8 +99,14 @@ const CommentsSection = ({postId}) => {
               <button onClick={commentCreation}>Commenta!</button></>}
     <div className={styles.list}>
             {comments.length > 0 ?
-                comments.map(comment => (<CommentItem comment={comment} refresh={()=> retrieveComments(postId)} onDeleteComment={()=>commentElimination(comment.id)}/>)) : <p>Questo post non ha ancora commenti</p>}
+                comments.map(comment => (<CommentItem comment={comment} refresh={()=> retrieveComments(postId)} onDeleteComment={()=>handleDeleteClick(comment.id)}/>)) : <p>Questo post non ha ancora commenti</p>}
         </div>
+        <ConfirmDialog
+        open={confirmDialog.open}
+        message="Sei sicuro di voler eliminare il commento?"
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+      />
     </>
 }
 

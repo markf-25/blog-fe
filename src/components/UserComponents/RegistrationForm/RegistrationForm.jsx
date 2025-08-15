@@ -64,7 +64,7 @@ const RegistrationForm = ({setIsLogin}) => {
         }
 
         if (!passwordsMatch) {
-            handleFormErrorsChange('confirmPassword', 'Le password devono corrispondere');
+            handleFormErrorsChange('password', 'Le password devono corrispondere');
         }
 
         if (!areUsernameCharactersValid || !isUsernameLengthValid || !isEmailValid || !isPasswordValid || !passwordsMatch) {
@@ -100,11 +100,11 @@ const RegistrationForm = ({setIsLogin}) => {
                        type="text" value={usernameValue}/>
           <Input id="email" label="Email" error={registrationError.email} name="email" placeholder="Inserisci la tua email" onChange={handleEmailChange}
                        type="text" value={emailValue}/>
-          <Input id="password" label="Password" error={registrationError.password} name="password" placeholder="Scegli una password" onChange={handlePasswordChange}
-                       type="text" value={passwordValue}/>
-          <Input id="passwordConfirmed" label="Password" error={registrationError.passwordConfirmed} name="password" placeholder="Conferma la tua password" onChange={handleConfirmPasswordChange}
-                       type="text" value={confirmPasswordValue}/>  
-            <button id="sendingButton" type="submit">
+          <Input id="password" label="Password" name="password" placeholder="Scegli una password" onChange={handlePasswordChange}
+                       type="password" value={passwordValue}/>
+          <Input id="passwordConfirmed" label="Password" error={registrationError.password} name="password" placeholder="Conferma la tua password" onChange={handleConfirmPasswordChange}
+                       type="password" value={confirmPasswordValue}/>  
+            <button id="sendingButton" type="submit" className={styles.formButton}>
               Invia
             </button>
           </form>

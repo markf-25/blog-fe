@@ -1,3 +1,4 @@
+
 .overlay {
   position: fixed;
   top: 0;
@@ -8,6 +9,7 @@
   backdrop-filter: blur(4px);
   z-index: 1100;
 }
+
 
 .modal {
   position: fixed;
@@ -21,9 +23,12 @@
   justify-content: center;
   align-items: center;
 
-  max-width: 90%;
-  width: 400px;
-  min-height: 300px;
+  min-width: 320px;    
+  max-width: 400px;    
+
+  min-height: 300px;   
+  max-height: 90vh;   
+  overflow: hidden;    
 
   background-color: var(--card-bg);
   color: var(--text);
@@ -31,49 +36,64 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
   padding: 2rem;
 
-  transition: 
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease,
     background-color 0.3s ease,
     color 0.3s ease,
     box-shadow 0.3s ease;
 }
 
-.content,
-.form,
-.switch {
+
+.content {
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: 0.75rem;
 }
 
+
 .form {
-  gap: 0.5rem;
-  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 200px;
-  max-height: 400px;
+  gap: 0.5rem;
+  padding-top: 15px;
+  width: 100%;
+  max-width: 350px;
 }
+
+.form button, .switchButton {
+  width: 100%;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+}
+
 
 .error {
   color: var(--error-text);
   font-size: 0.9rem;
   margin-top: -0.5rem;
   max-width: 350px;
+  min-height: 2.4em;
+  display: block;
+  line-height: 1.2em;
 }
 
-.switch {
-  font-size: 0.9rem;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.switch a {
-  color: var(--accent);
+.closebutton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: auto;
+  height: auto;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
   cursor: pointer;
-  text-decoration: underline;
-  transition: color 0.3s ease;
+  transition: transform 0.4s ease;
 }
 
-.switch a:hover {
-  color: var(--accent2);
+.closebutton:hover {
+  box-shadow: none;
+  transform: scale(1.3);
 }

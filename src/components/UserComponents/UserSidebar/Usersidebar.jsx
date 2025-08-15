@@ -33,7 +33,7 @@ const UserSidebar = ({user}) => {
       className={styles.settingsToggle}
       onClick={() => setShowSettings(!showSettings)}
     >
-      <MdSettings /> Impostazioni <MdSettings />
+      <MdSettings /> Impostazioni
     </h3>
 
     <div className={`${styles.settings} ${showSettings ? styles.show : ""}`}>

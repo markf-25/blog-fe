@@ -33,11 +33,12 @@ const LoginForm = ({onClose, setRequestNewPassword}) => {
     
     setFormErrors({
             email: '',
-            password: '',
+            error: '',
         })
 
     if(!isEmail(emailValue)) {
-        handleFormErrorsChange({email: "L'email non è valida"})
+        handleFormErrorsChange("email", "L'email non è valida")
+        return
     }
 
     const payload = {
@@ -53,6 +54,7 @@ const LoginForm = ({onClose, setRequestNewPassword}) => {
         }
         else {
             console.error("Login fallito")
+handleFormErrorsChange("error", "Login fallito. Verifica le credenziali")
         }
     }
 
@@ -62,10 +64,10 @@ const LoginForm = ({onClose, setRequestNewPassword}) => {
             <form className={styles.form} onSubmit={submitForm}>
                 <Input id="email" label="Email" error={formErrors.email} name="email" placeholder="Inserisci un'e-mail" onChange={handleEmailChange}
                        type="text" value={emailValue}/>
-                <Input id="password" label="Password" error={formErrors.password} name="password" placeholder="Inserisci la tua password"
+                <Input id="password" label="Password" error={formErrors.error} name="password" placeholder="Inserisci la tua password"
                        onChange={handlePasswordChange} type="password" value={passwordValue}/>
-                <button type="submit" className="submit_button">Accedi</button>
-                <button type="button" className="button" onClick={()=> setRequestNewPassword(true)}>Password dimenticata?</button>
+                <button type="submit" className={styles.formButton}>Accedi</button>
+                <button type="button" className={styles.formButton} onClick={()=> setRequestNewPassword(true)}>Password dimenticata?</button>
             </form>
         </div>
         </>

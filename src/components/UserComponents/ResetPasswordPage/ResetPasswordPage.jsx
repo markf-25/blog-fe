@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { validateResetToken } from "../../../services/password.service.js"
 
 import ResetPasswordForm from "../ResetPasswordForm/ResetPasswordForm.jsx"
+import styles from "./ResetPasswordPage.module.css"
 
 const ResetPasswordPage = () => {
 
@@ -35,10 +36,10 @@ const ResetPasswordPage = () => {
     }, [])
 
     return <>
-
+        <div className={styles.passwordPageContainer}>
         {isLoading? <p>ATTENDERE</p> : null}
         {isTokenValid? <ResetPasswordForm resetToken={resetTokenToBeChecked}/> : <p>TOKEN NON VALIDO</p>}
-    
+        </div>
     </>
 }
 

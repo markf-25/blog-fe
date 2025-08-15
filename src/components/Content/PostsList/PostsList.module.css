@@ -1,5 +1,10 @@
 .list {
     display: grid;
+    justify-items: center;
     gap: 2rem;
     overflow-y: auto;
+    scroll-snap-align: start;
+    width: 60vw;
+
+    scrollbar-width: thin;
 }

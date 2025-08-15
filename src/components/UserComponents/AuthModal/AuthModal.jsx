@@ -22,16 +22,16 @@ const AuthModal = ({isOpen, onClose}) => {
         <Modal isOpen={isOpen} onClose={onCloseHandler}>
           {isLogin && !requestNewPassword && <>
           <LoginForm onClose={onCloseHandler} setRequestNewPassword={setRequestNewPassword}/>
-          <div className={styles.switch}>
+          <div>
           <p>Non sei registrato?</p>
-          <button className="switch-button" type="button" onClick={() => setIsLogin(false)}>Registrati!</button>
+          <button  className={styles.switchButton} type="button" onClick={() => setIsLogin(false)}>Registrati!</button>
           </div>
           </>}
           {!isLogin && !requestNewPassword && <><RegistrationForm setIsLogin={setIsLogin}/>
-            <div className={styles.switch}>
+            <div>
           <p>Hai già un account?</p>
           <button
-            className="switch-button"
+            className={styles.switchButton}
             type="button"
             onClick={()=> setIsLogin(true)}
           >

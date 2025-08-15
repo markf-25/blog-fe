@@ -1,8 +1,7 @@
-.mainDiv {
+.userPageMainDiv {
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
-  padding-top: 70px;
+  overflow-y: auto;
 }
 
 .sidebar {
@@ -18,8 +17,10 @@
 }
 
 .posts {
-  margin-left: 300px;
-  padding: 2rem;
-  flex: 1;
-  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 70px;
+  right: 20vw;
+  padding: 1rem;
+  height: calc(100vh - 70px);
 }

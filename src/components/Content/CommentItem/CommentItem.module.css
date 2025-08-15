@@ -4,20 +4,23 @@
     padding: 10px;
     border-radius: 30px;
     box-shadow: var(--card-bg) 5px 5px;
+    color: var(--text-alternative);
 }
 
 .commentWrapper {
-    padding: 10px 20px;
+    padding: 25px 20px;
 }
 
 .author {
     font-size: 1.1rem;
-    color: var(--text)
+    font-weight: 100;
+    padding-bottom: 1rem;
+
 }
 
 .commentText {
     font-size: 0.9rem;
-    color: var(--text)
+
 }
 
 .editComment {
@@ -30,7 +33,6 @@
   font-size: 10px;
   font-weight: 400;
   font-style: italic;
-  color: var(--text);
   cursor: pointer;
   padding: 0.3rem 0.6rem;
   border-radius: 4px;

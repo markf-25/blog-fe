@@ -22,7 +22,7 @@ const ContentPage = () => {
   const [lazyState, setLazyState] = useState({
     cursor: null,
     direction: "prev",
-    limit: 10,
+    limit: 100,
   });
 
 
@@ -61,12 +61,12 @@ useEffect(() => {
 }, [socketReady, socket]);
 
   return <>
-    <div className={styles.content}>
+    <div className={styles.contentPageWrapper}>
       <button
         className={styles.addPostButton}
         onClick={() => setIsModalOpened(true)}
       >
-        AGGIUNGI POST
+        Nuovo post!
       </button>
 
       {isModalOpened &&

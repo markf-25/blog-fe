@@ -1,9 +1,14 @@
 .list {
     width: 33vw;
     height: 100%;
-    overflow-y: scroll;
-    scrollbar-color: var(--border)
+    overflow-y: auto;
+    scrollbar-color: var(--text);
+    margin-top: 2rem;
+    text-align: center;
+    scrollbar-width: thin;
+    scrollbar-color: var(--card-bg) var(--bg);
 }
+
 
 .commentInput {
     height: 10vh;

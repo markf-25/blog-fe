@@ -25,6 +25,18 @@ text-align: center;
   gap: 10px;
 }
 
+.logo {
+  top: 0.5rem;
+  left: 0.5rem;
+  width: 5vh;
+  height: auto;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.4s ease;  
+}
+
 .closebutton {
   position: absolute;
   top: 0.5rem;

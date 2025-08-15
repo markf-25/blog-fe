@@ -9,7 +9,7 @@ function MainLayout() {
     return (
         <div className={styles.layout}>
             <Header />
-            <div className={styles.content}>
+            <div className={styles.mainLayoutContent}>
                 <Outlet />
             </div>
         </div>

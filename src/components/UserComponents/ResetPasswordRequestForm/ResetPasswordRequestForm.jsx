@@ -8,7 +8,7 @@ import { isNotEmpty, isEmail } from "../../../utils/validators.jsx"
 
 import { requestForANewPassword } from "../../../services/password.service.js"
 
-import styles from "../../Modal/Modal.module.css"
+import styles from "../AuthModal/AuthModal.module.css"
 
 const ResetPasswordRequestForm = ({setIsLogin, setRequestNewPassword, onClose}) => {
 
@@ -44,7 +44,7 @@ const ResetPasswordRequestForm = ({setIsLogin, setRequestNewPassword, onClose}) 
         if (resetRequest) {
             setToastMessage("Clicca sul link che hai ricevuto via mail per scegliere una nuova password")
             setTimeout(() => onClose(), 5000);
-
+            
         }
         else {
             setToastMessage("Qualcosa è andato storto. Riprova")
@@ -53,11 +53,11 @@ const ResetPasswordRequestForm = ({setIsLogin, setRequestNewPassword, onClose}) 
 
     return <>
     <div className={styles.content}>
-            <h2 className={styles.header}>Password dimenticata?</h2>
-            <form className={styles.children} onSubmit={requestPassword}>
+            <h2>Password dimenticata?</h2>
+            <form className={styles.form} onSubmit={requestPassword}>
                 <Input id="email" error={formErrors.email} name="email" placeholder="Inserisci la tua email" onChange={handleEmailChange} value={emailValue}/>
-                <button type="submit" className="submit_button">Richiedi la nuova password</button>
-                <button type="button" className="button" onClick={()=> {setIsLogin(true), setRequestNewPassword(false)}}>Torna al login</button>
+                <button type="submit" className={styles.formButton} >Richiedi la nuova password</button>
+                <button type="button" className={styles.formButton} onClick={()=> {setIsLogin(true), setRequestNewPassword(false)}}>Torna al login</button>
             </form>
         </div>
         {toastMessage && <Toast header="Cambio password" message={toastMessage} onClose={() => setToastMessage("")} />}

@@ -13,7 +13,7 @@ const user = useSelector(userSelector)
 const posts = useSelector(postsSelector);
 
 return <>
-<div className={styles.mainDiv}>
+<div className={styles.userPageMainDiv}>
 <div className={styles.sidebar}>
 <UserSideBar user={user}/>
 </div>

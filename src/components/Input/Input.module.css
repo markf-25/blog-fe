@@ -1,15 +1,23 @@
-.input {
-  width:100%;
+.input,
+.richTextInput {
+  width: 280px;            
+  height: 2.4em;           
   background-color: white;
-  word-break: break-all;
+  border: 1px solid black;
+  padding: 0 0.5rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  box-sizing: border-box;   
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  color: var(--text-alternative);
 }
 
 .richTextInput {
-  height: 25vh;
-  width: 100%;
-  background-color: white;
-  border: 1px solid black;
-  word-break: break-all;
+  height: 150px;           
+  resize: none;
+  text-align: left;
 }
 
 .styleWrapper {
@@ -19,6 +27,7 @@
   width: 100%;
   position: relative;
   padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .styleChanger {
@@ -31,4 +40,17 @@
   cursor: pointer;
   user-select: none;
   border-radius: 10px;
+  transition: background-color 0.25s ease;
+}
+
+.styleChanger:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+.input:focus,
+.richTextInput:focus {
+  border-color: var(--primary, #007bff);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }

@@ -47,6 +47,7 @@ const ResetPasswordForm = ({resetToken}) => {
 
     if (!passwordsMatch) {
             handleFormErrorsChange('confirmPassword', 'Le password devono corrispondere');
+            return
         }
     
 
@@ -59,7 +60,7 @@ const ResetPasswordForm = ({resetToken}) => {
         console.log(payload)
         if (newPassword) {
             setToastMessage("Password cambiata con successo")
-            setTimeout(() => navigate("/"), 5000);
+            setTimeout(() => navigate("/"), 3000);
         }
         else {
             setToastMessage("Qualcosa è andato storto")

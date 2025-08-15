@@ -11,16 +11,14 @@ const Image = ({
 
   let imagePath = src? src : fallbackImage
 
-  return (
-    <div>
+  return <>
       <img
         src={imagePath}
         alt={alt}
         className={`${styles[className]}`}
         {...props}
       />
-    </div>
-  );
+    </>;
 }
 
 export default Image

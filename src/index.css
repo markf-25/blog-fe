@@ -1,60 +1,89 @@
-#root {
-  height: 100vh;
-}
-body, html {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
- 
-  background: var(--background);
-  margin: 0;
-  padding: 0;
-
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-button {
-padding: 0.75rem 1.5rem;
-width: 200px;
-color: var(--text);
-background-color: var(--bg);
-border: 2px solid var(--border);
-border-radius: 0.75rem;
-cursor: pointer;
-transition: 
-    background-color 0.5s ease-in-out,
-    box-shadow 0.3s ease,
-    filter 0.3s ease;
+html {
+  font-size: 16px; /* 1rem = 16px base */
 }
 
-button:hover {
-  filter: brightness(1.1);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+@media (max-width: 768px) {
+  html {
+    font-size: 14px; /* tablet */
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 12px; /* mobile */
+  }
+}
+
+body, h1, h2, h3, h4, p, ul, ol, figure {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#root {
+  height: 100vh;
+}
+
+body, html {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: var(--background);
+  line-height: 1.5;
+  color: var(--text);
 }
 
 body[data-theme='dark'] {
   --bg: #121C2D;
   --text: #E0F7FA;
   --text-secondary: #B0BEC5;
+  --text-alternative: #37474F;
   --accent: #00B8D4;
   --accent2: #2196F3;
   --border: #263238;
   --image-border: #37474F;
   --card-bg: #37474F;
-
   --error-text: #e53935;
-
 }
 
 body[data-theme='light'] {
- --bg: #F3EBFF;
---text: #3B2B5A;
---text-secondary: #6C5B7B;
---accent: #A166FF;
---accent2: #C89CFF;
---border: #BFA2E0;
---image-border: #4A3668;
---card-bg: #D4C0FF;
+  --bg: #F3EBFF;
+  --text: #3B2B5A;
+  --text-secondary: #6C5B7B;
+  --text-alternative: #70628b;
+  --accent: #A166FF;
+  --accent2: #C89CFF;
+  --border: #BFA2E0;
+  --image-border: #4A3668;
+  --card-bg: #D4C0FF;
+  --error-text: #E5396F;  
+}
+button {
+    padding: 0.75rem 1.5rem;
+    width: clamp(10rem, 50%, 12.5rem); 
+    font-size: 1rem;
+    color: var(--text);
+    background-color: var(--bg);
+    border: 0.125rem solid var(--border);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: 
+        background-color 0.5s ease-in-out,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
+}
 
---error-text: #E5396F;  
+button:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0.25rem 0.75rem rgba(255, 255, 255, 0.1);
 }
 
 .main {

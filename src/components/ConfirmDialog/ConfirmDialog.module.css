@@ -1,0 +1,45 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.dialog {
+  background-color: var(--card-bg);
+  color: var(--text);
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 250px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.okButton {
+background-color: var(--accent);
+color: var(--text);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancelButton {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}

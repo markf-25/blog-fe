@@ -9,10 +9,10 @@ const ProtectedRoute = () => {
 
     useEffect(() => {
         if (!user.accessToken) {
-            navigate("/");
+            navigate("/", { replace: true });
         }
 
-    }, []);
+    }, [user.accessToken]);
 
     return <Outlet />
 }

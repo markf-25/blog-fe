@@ -3,6 +3,7 @@ import Image from "../../Image/Image";
 import PostModal from "../PostModal/PostModal";
 import LikeComponent from "../LikeComponent/LikeComponent"
 import CommentsSection from "../CommentsSection/CommentsSection.jsx"
+import ConfirmDialog from "../../ConfirmDialog/ConfirmDialog"
 
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
@@ -35,6 +36,7 @@ const PostDetails = () => {
 
   const user = useSelector(userSelector);
 
+ const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const onConfirm = (payload) => {
     setIsModalOpened(false);
@@ -58,21 +60,22 @@ const PostDetails = () => {
     }
   };
 
-  const cancelPost = async (post) => {
-    const confirmDelete = window.confirm(
-      "Sei sicuro di voler cancellare il post?"
-    );
-    if (!confirmDelete) return;
+    const cancelPost = () => {
+    setIsDialogOpen(true);
+  };
 
-    //TODO GESTIRE CON TOAST//
-
+  const handleConfirmDialogOk = async () => {
+    setIsDialogOpen(false);
     try {
-      console.log("CANCELLAZIONE IN CORSO?", post);
       const data = await deletePost({ postId: post._id });
       dispatch(removePost(data));
     } catch (e) {
       console.error(e);
     }
+  };
+
+  const handleConfirmDialogCancel = () => {
+    setIsDialogOpen(false);
   };
 
   useEffect(() => {
@@ -102,24 +105,31 @@ const PostDetails = () => {
   const authorName = getUsernameById(post.authorId) || `ID: ${post.authorId}`;
 
   return <>
+  {thisPostIsEditable && (
+        <div className={styles.editDeletePost}>
+          <button className={styles.editButton} onClick={() => setIsModalOpened(true)}>
+            Modifica il post
+          </button>
+          <button className={styles.deleteButton} onClick={() => cancelPost()}>Elimina il post</button>
+        </div>
+      )}
       {post? 
-      <div className={styles.commentBody}>
+      <div className={styles.postLayout}>
         <div className={styles.detail}>
-          <div className={styles.header}>
+          <header className={styles.header}>
 <p>{<strong>{authorName}</strong>}</p>
 
 <p> <strong>{date}</strong> alle{" "}
                 <strong>{hour}</strong>
               </p>
-          </div>
+          </header>
 <h1 className={styles.title}>{post.title}</h1>
+{/* sarebbe "post.image", ma il not verrà aggiunto quando avremo image restituita dal backend */}
           {!post.image && (
-            <div className={styles.imageWrapper}>
               <Image
                 src={post.image}
                 alt={`Immagine di copertina per ${post.title}`}
               />
-            </div>
           )}
 
           <section
@@ -127,13 +137,13 @@ const PostDetails = () => {
             dangerouslySetInnerHTML={{ __html: post.content }}
           ></section>
 
-          <section className={styles.tags}>
+          <section>
             {post.tags?.length > 0 ? (
-              <ul>
+              <div className={styles.tags}>
                 {post.tags.map((tag) => (
-                  <li key={tag}>#{tag}</li>
+                  <p key={tag}>#{tag}</p>
                 ))}
-              </ul>
+              </div>
             ) : (
               <i>Nessun tag presente</i>
             )}
@@ -149,14 +159,13 @@ const PostDetails = () => {
       </div>
       :
         <p>Nessun post trovato</p>}
-      {thisPostIsEditable && (
-        <div className={styles.editDeletePost}>
-          <button className={styles.editButton} onClick={() => setIsModalOpened(true)}>
-            Modifica il post
-          </button>
-          <button className={styles.deleteButton} onClick={() => cancelPost(post)}>Elimina il post</button>
-        </div>
-      )}
+
+        <ConfirmDialog
+  open={isDialogOpen}
+  message="Sei sicuro di voler eliminare il post?"
+  onConfirm={handleConfirmDialogOk}
+  onCancel={handleConfirmDialogCancel}
+/>
 
       {isModalOpened &&
         createPortal(

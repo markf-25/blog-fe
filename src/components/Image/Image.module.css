@@ -27,8 +27,9 @@
 }
 
 .post-image {
-   width: 50vw;
-   height: 30vh;
-    border-radius: 5px;
-    object-fit: cover;
+width: 100%;
+  height: auto;
+  max-height: 30vh;
+  border-radius: 0.3125rem;
+  object-fit: cover;
 }
