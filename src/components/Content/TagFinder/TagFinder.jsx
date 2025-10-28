@@ -6,6 +6,7 @@ import Input from "../../Input/Input";
 import useInput from "../../../hooks/useInput.js";
 
 import useSocketEmit from "../../../hooks/useSocketEmit.js";
+import styles from "./TagFinder.module.css"
 
 const TagFinder = ({addTag, tagsAlreadyAdded}) => {
 
@@ -66,7 +67,7 @@ const filteredTags = tags.filter(tag => !tagsAlreadyAdded.includes(tag));
         filteredTags.map((tag) => (
           <button
             key={tag}
-            className="tagList"
+            className={styles.tagSuggestions}
             id={`checkbox-${tag}`}
             type="button"
             placeholder={tag}
@@ -82,7 +83,7 @@ const filteredTags = tags.filter(tag => !tagsAlreadyAdded.includes(tag));
         <p>Aggiungi un nuovo tag</p>
         <button
             key={checkNewTag}
-            className="tagList"
+            className={styles.tagList}
             id={`checkbox-${checkNewTag}`}
             type="button"
             placeholder={checkNewTag}

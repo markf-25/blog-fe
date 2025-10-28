@@ -36,7 +36,7 @@ a {
 
 body, html {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background: var(--background);
+  background: var(--bg);
   line-height: 1.5;
   color: var(--text);
 }
@@ -51,6 +51,7 @@ body[data-theme='dark'] {
   --border: #263238;
   --image-border: #37474F;
   --card-bg: #37474F;
+  --card-bg-secondary: #37474F;
   --error-text: #e53935;
 }
 
@@ -64,6 +65,7 @@ body[data-theme='light'] {
   --border: #BFA2E0;
   --image-border: #4A3668;
   --card-bg: #D4C0FF;
+  --card-bg-secondary: #37474F;
   --error-text: #E5396F;  
 }
 button {

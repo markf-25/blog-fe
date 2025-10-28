@@ -1,89 +1,75 @@
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  z-index: 1100;
-}
-
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1200;
-
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
+  gap: 1.5rem;
   width: 60vw;
-  height: 60vh;
-
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
   background-color: var(--card-bg);
   color: var(--text);
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
   padding: 2rem;
-
-  transition: 
-    background-color 0.3s ease,
-    color 0.3s ease,
-    box-shadow 0.3s ease;
 }
 
 .inputAndTagsDiv {
   display: flex;
-  flex-direction: row;
-  gap: 2rem;
-}
-
-.inputDiv {
-  width: 25vw;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .tagsDiv {
-  width: 15vw;
-}
-
-.form,
-.error,
-.switch {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  gap: 0.8rem;
 }
 
-.form {
-  gap: 0.5rem;
-  padding-top: 15px;
-  justify-content: center;
+.tag-chip {
+  display: inline-flex;
   align-items: center;
-}
-
-.error {
-  color: var(--error-text);
-  font-size: 0.9rem;
-  margin-top: -0.5rem;
-}
-
-.switch {
-  font-size: 0.9rem;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.switch a {
-  color: var(--accent);
+  background-color: var(--chip-bg, #f5f5f5);
+  border: 1px solid var(--chip-border, #ccc);
+  color: var(--text);
+  border-radius: 16px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
   cursor: pointer;
-  text-decoration: underline;
-  transition: color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
-.switch a:hover {
-  color: var(--accent2);
+.tag-chip:hover {
+  background-color: var(--chip-hover-bg, #e0e0e0);
+}
+
+.tag-chip button {
+  border: none;
+  background: transparent;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+.tagList {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  margin: 0.25rem;
+  background-color: transparent;
+  border: 1px solid var(--accent, #1976d2);
+  color: var(--accent, #1976d2);
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.tagList:hover {
+  background-color: var(--accent, #1976d2);
+  color: white;
 }

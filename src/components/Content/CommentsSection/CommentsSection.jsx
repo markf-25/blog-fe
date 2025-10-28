@@ -27,7 +27,7 @@ const CommentsSection = ({postId}) => {
 
   const [confirmDialog, setConfirmDialog] = useState({
     open: false,
-    commentId: null,
+    commentId: null
   });
 
   const retrieveComments = async (postId) => {
@@ -40,7 +40,7 @@ const CommentsSection = ({postId}) => {
 
     const commentCreation = async () => {
       const payload = {
-        postId: postId,
+        postId,
         text: commentValue,
         authorId: user.id
     }
